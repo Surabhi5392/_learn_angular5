@@ -11,26 +11,27 @@ import { HttpClient } from '@angular/common/http';
         border-top-right-radius: 0;
         border-top: 0;
       }
-    `
-  ]
+    `,
+  ],
 })
 export class AppComponent implements OnInit {
   query: string;
   artists: object;
+  CurrentArtist: object;
 
   showArtist(item) {
     this.query = item.name;
     item.highlight = !item.highlight;
+    this.CurrentArtist = item;
   }
 
-  constructor( private http: HttpClient ) {
+  constructor(private http: HttpClient) {
     this.query = '';
   }
 
   ngOnInit(): void {
-    this.http.get<Object>('../assets/data.json').subscribe( data => {
+    this.http.get<Object>('../assets/data.json').subscribe((data) => {
       this.artists = data;
-    })
+    });
   }
-
 }
